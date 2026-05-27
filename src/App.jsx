@@ -43,7 +43,7 @@ const getAllAvailableUsers = (postData) => {
 
 // 서버로부터 실시간 포스트 목록을 갱신하는 공통 헬퍼
 const refreshPosts = (setPostData) => {
-  fetch('http://13.114.171.196:8080/posts')
+  fetch('/api/posts')
     .then((response) => {
       if (!response.ok) throw new Error();
       return response.json();
@@ -105,7 +105,7 @@ function usePostData() {
   const [postData, setPostData] = useState([]);
 
   useEffect(() => {
-    fetch('http://13.114.171.196:8080/posts')
+    fetch('/api/posts')
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP Error: ${response.status}`);
@@ -150,7 +150,7 @@ function App() {
     }
 
     // 태그 기반으로 서버에 검색 요청
-    fetch(`http://13.114.171.196:8080/posts/search?tag=${searchTag}`)
+    fetch(`/api/posts/search?tag=${searchTag}`)
       .then((response) => {
         if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
         return response.json();
@@ -295,7 +295,7 @@ function PostCreateModal({ onClose, setPostData, postData }) {
       alert("서버 전송 예정 데이터:\n" + JSON.stringify(requestBody, null, 2));
 
       // API로 서버에 게시글 생성 요청
-      fetch('http://13.114.171.196:8080/posts', {
+      fetch('/api/posts', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -323,7 +323,7 @@ function PostCreateModal({ onClose, setPostData, postData }) {
 
     // 만약 selectedUserId가 숫자가 아닌 문자열 이름인 경우 (백엔드 미수정 대비 자동 등록 처리)
     if (isNaN(Number(selectedUserId))) {
-      fetch('http://13.114.171.196:8080/users', {
+      fetch('/api/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -433,7 +433,7 @@ function UserCreateModal({ onClose, setPostData }) {
     }
 
     // API로 서버에 유저 생성 요청
-    fetch('http://13.114.171.196:8080/users', {
+    fetch('/api/users', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -523,7 +523,7 @@ function PostEditModal({ postId, onClose, setPostData, postData }) {
 
   // 2. 마운트 시 서버 API에서 단일 게시물 데이터 fetch 시도
   useEffect(() => {
-    fetch(`http://13.114.171.196:8080/posts/${postId}`)
+    fetch(`/api/posts/${postId}`)
       .then((response) => {
         if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
         return response.json();
@@ -556,7 +556,7 @@ function PostEditModal({ postId, onClose, setPostData, postData }) {
 
     const executePostUpdate = (numericUserId) => {
       // 서버에 PUT 요청 시도
-      fetch(`http://13.114.171.196:8080/posts/${postId}`, {
+      fetch(`/api/posts/${postId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -586,7 +586,7 @@ function PostEditModal({ postId, onClose, setPostData, postData }) {
 
     // 만약 selectedUserId가 숫자가 아닌 문자열 이름인 경우 (백엔드 미수정 대비 자동 등록 처리)
     if (isNaN(Number(selectedUserId))) {
-      fetch('http://13.114.171.196:8080/users', {
+      fetch('/api/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -622,7 +622,7 @@ function PostEditModal({ postId, onClose, setPostData, postData }) {
     }
 
     // 서버에 DELETE 요청 시도
-    fetch(`http://13.114.171.196:8080/posts/${postId}`, {
+    fetch(`/api/posts/${postId}`, {
       method: 'DELETE',
     })
       .then((response) => {
