@@ -213,8 +213,8 @@ function App() {
 
         {/* 여러 명의 PostList를 가로로 배치하기 위해 flex 적용 */}
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '20px', marginTop: '20px' }}>
-          {postData.map((userData) => (
-            <PostList key={userData.id} {...userData} onCardClick={setEditingPostId} />
+          {postData.map((userData, index) => (
+            <PostList key={userData.id} {...userData} onCardClick={setEditingPostId} isFirst={index === 0} isLast={index === postData.length - 1} />
           ))}
         </div>
       </section>
@@ -246,6 +246,27 @@ function Card(post) {
 function PostList(userObject) {
   return (
     <div className="post-list-container">
+      {userObject.isFirst && (
+        <>
+          <img 
+            src="/back1.png" 
+            alt="decorator sticker 2" 
+            className="back1-decorator-image"
+          />
+          <img 
+            src="/back.png" 
+            alt="decorator sticker" 
+            className="back-decorator-image"
+          />
+        </>
+      )}
+      {userObject.isLast && (
+        <img 
+          src="/back2.png" 
+          alt="decorator sticker 3" 
+          className="back2-decorator-image"
+        />
+      )}
       <div className="post-list-title-wrapper">
         <h3 className="post-list-title">
           {userObject.user_name}

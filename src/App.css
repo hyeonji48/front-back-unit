@@ -186,6 +186,7 @@
 }
 
 .post-list-container {
+  position: relative;
   border: 1px solid #6f4300;
   border-radius: 8px;
   padding: 16px;
@@ -503,6 +504,42 @@
 
 .delete-btn:hover {
   background-color: #ff7875;
+}
+
+/* 첫 번째 컬럼에 겹치게 붙는 back.png 스티커 데코레이터 (2.5배 확대 및 마진 조율) */
+.back-decorator-image {
+  position: absolute;
+  width: 95px; /* 크기를 기존의 2.5배로 전면 확대 */
+  height: auto;
+  left: -75px; /* 더욱 과감하게 왼쪽 바깥 여백(Gutter)으로 밀어내 겹침 조율 */
+  top: 15px; /* 안정적인 세로축 배치 */
+  z-index: 10; /* 카드보다 살짝 앞으로 나오게 설정 */
+  pointer-events: none; /* 마우스 클릭이 카드를 뚫고 들어갈 수 있게 차단 해제 */
+  filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.15)); /* 입체적 그림자 */
+}
+
+/* 첫 번째 컬럼에 겹치게 붙는 대형 back1.png 스티커 데코레이터 (back.png의 1.5배, 더 왼쪽/아래 배치) */
+.back1-decorator-image {
+  position: absolute;
+  width: 142px; /* back.png의 1.5배 크기 */
+  height: auto;
+  left: -135px; /* 142px 너비에 부합하도록 컬럼 외부로 과감하게 돌출되도록 여백 확대 */
+  top: 90px; /* 아래쪽 하강 배치 */
+  z-index: 9; /* 레이어드 하단 배치 */
+  pointer-events: none; /* 마우스 클릭 관통 활성화 */
+  filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.12)); /* 은은한 그림자 */
+}
+
+/* 마지막 컬럼(멋사) 오른쪽에 붙는 back2.png 스티커 데코레이터 (back.png와 동일 크기) */
+.back2-decorator-image {
+  position: absolute;
+  width: 95px; /* back.png와 동일 크기 */
+  height: auto;
+  right: -55px; /* 오른쪽으로 겹치게 돌출 */
+  bottom: 15px; /* y축 그대로 유지 */
+  z-index: 10;
+  pointer-events: none;
+  filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.15));
 }
 
 
